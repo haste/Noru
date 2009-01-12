@@ -71,6 +71,7 @@ end)
 addon:RegisterEvent'PLAYER_LOGIN'
 
 SlashCmdList['NORU_MOUNT'] = function()
+	if(InCombatLockdown()) then return end
 	if(not IsMounted()) then
 		local flying = player.flying
 		local ground = player.ground
