@@ -1,0 +1,8 @@
+## Interface: 30000
+## Title: Noru
+## Author: Haste
+## Version: 1.0
+## X-eMail: troeks@gmail.com
+## Notes: Add a slightly smart /mount slash command.
+
+noru.lua
