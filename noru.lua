@@ -4,7 +4,7 @@
 
 -- Known missing mounts becaues I'm lazy: Paladin
 
---local addon = CreateFrame'Frame'
+local addon = CreateFrame'Frame'
 local player = {}
 
 local mounts = {
