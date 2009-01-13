@@ -2,8 +2,6 @@
 -- really plan on doing anything special with it, or extend it beyond what it
 -- currently does.
 
--- Known missing mounts becaues I'm lazy: Paladin
-
 local addon = CreateFrame'Frame'
 local player = {}
 
