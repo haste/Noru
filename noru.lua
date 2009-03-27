@@ -60,7 +60,9 @@ local mounts = {
 	},
 }
 
-math.randomseed(time())
+-- math.randomseed was removed in 3.1.
+if(math.randomseed) then math.randomseed(time()) end
+
 addon:SetScript('OnEvent', function()
 	local list = {}
 	for i=1, GetNumCompanions'MOUNT' do
