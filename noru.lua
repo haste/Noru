@@ -85,8 +85,7 @@ end)
 addon:RegisterEvent'PLAYER_LOGIN'
 
 SlashCmdList['NORU_MOUNT'] = function()
-	if(InCombatLockdown()) then return end
-	if(not IsMounted()) then
+	if(not IsMounted() and not InCombatLockdown()) then
 		local flying = player.flying
 		local ground = player.ground
 		if(IsFlyableArea() and (GetRealZoneText() ~= 'Dalaran' or GetMinimapZoneText() == "Krasus' Landing") and GetZoneText() ~= 'Wintergrasp' and flying) then
