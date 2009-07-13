@@ -62,8 +62,8 @@ local mounts = {
 addon:SetScript('OnEvent', function()
 	local list = {}
 	for i=1, GetNumCompanions'MOUNT' do
-		local _, spellName, spellId = GetCompanionInfo('MOUNT', i)
-		list[spellId] = spellName
+		local _, _, spellId = GetCompanionInfo('MOUNT', i)
+		list[spellId] = i
 	end
 
 	for type, skill in pairs(mounts) do
@@ -88,9 +88,9 @@ SlashCmdList['NORU_MOUNT'] = function()
 		local flying = player.flying
 		local ground = player.ground
 		if(IsFlyableArea() and (GetRealZoneText() ~= 'Dalaran' or GetMinimapZoneText() == "Krasus' Landing") and GetZoneText() ~= 'Wintergrasp' and flying) then
-			CastSpellByName(flying[math.random(#flying)])
+			CallCompanion('MOUNT', flying[math.random(#flying)])
 		elseif(ground) then
-			CastSpellByName(ground[math.random(#ground)])
+			CallCompanion('MOUNT', ground[math.random(#ground)])
 		end
 	else
 		Dismount()
