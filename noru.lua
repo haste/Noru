@@ -87,7 +87,7 @@ SlashCmdList['NORU_MOUNT'] = function()
 	if(not IsMounted() and not InCombatLockdown()) then
 		local flying = player.flying
 		local ground = player.ground
-		if(IsFlyableArea() and (GetRealZoneText() ~= 'Dalaran' or GetMinimapZoneText() == "Krasus' Landing") and GetZoneText() ~= 'Wintergrasp' and flying) then
+		if(IsFlyableArea() and flying) then
 			CallCompanion('MOUNT', flying[math.random(#flying)])
 		elseif(ground) then
 			CallCompanion('MOUNT', ground[math.random(#ground)])
