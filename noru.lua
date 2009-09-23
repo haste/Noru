@@ -59,8 +59,13 @@ local mounts = {
 	},
 }
 
-addon:SetScript('OnEvent', function()
+addon:SetScript('OnEvent', function(self, event, type)
+	if(type) then return end
+
 	local list = {}
+
+	table.wipe(player)
+
 	for i=1, GetNumCompanions'MOUNT' do
 		local _, _, spellId = GetCompanionInfo('MOUNT', i)
 		list[spellId] = i
@@ -81,6 +86,7 @@ addon:SetScript('OnEvent', function()
 		end
 	end
 end)
+addon:RegisterEvent'COMPANION_UPDATE'
 addon:RegisterEvent'PLAYER_LOGIN'
 
 SlashCmdList['NORU_MOUNT'] = function()
