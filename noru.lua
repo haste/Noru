@@ -5,6 +5,12 @@
 local addon = CreateFrame'Frame'
 local player = {}
 
+local wg = function()
+	local wait = GetWintergraspWaitTime()
+	local zone = GetZoneText()
+	if (zone == "Wintergrasp") and not wait then return true end
+end
+
 local mounts = {
 	flying = {
 		-- 310
@@ -93,7 +99,7 @@ SlashCmdList['NORU_MOUNT'] = function()
 	if(not IsMounted() and not InCombatLockdown()) then
 		local flying = player.flying
 		local ground = player.ground
-		if(IsFlyableArea() and flying) then
+		if(IsFlyableArea() and flying and not wg()) then
 			CallCompanion('MOUNT', flying[math.random(#flying)])
 		elseif(ground) then
 			CallCompanion('MOUNT', ground[math.random(#ground)])
