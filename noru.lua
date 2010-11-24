@@ -5,6 +5,11 @@
 local addon = CreateFrame'Frame'
 local player = {}
 
+local oldworld = function()
+	local c = GetCurrentMapContinent()
+		if (c ~= 3 or c ~= 4 and not IsSpellKnown(90269)) then return true end
+end
+
 local wg = function()
 	local wait = GetWintergraspWaitTime()
 	local zone = GetZoneText()
@@ -104,7 +109,7 @@ SlashCmdList['NORU_MOUNT'] = function()
 	if(not IsMounted() and not InCombatLockdown()) then
 		local flying = player.flying
 		local ground = player.ground
-		if(IsFlyableArea() and flying and not wg()) then
+		if(IsFlyableArea() and flying and not wg() and not oldworld()) then
 			CallCompanion('MOUNT', flying[math.random(#flying)])
 		elseif(ground) then
 			CallCompanion('MOUNT', ground[math.random(#ground)])
