@@ -7,7 +7,7 @@ local player = {}
 
 local oldworld = function()
 	local c = GetCurrentMapContinent()
-		if (c ~= 3 or c ~= 4 and not IsSpellKnown(90269)) then return true end
+	if(c ~= 3 or c ~= 4 and not IsSpellKnown(90269)) then return true end
 end
 
 local wg = function()
