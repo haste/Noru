@@ -4,11 +4,18 @@
 
 local addon = CreateFrame'Frame'
 local player = {}
+local sealegs = GetSpellInfo(76377)
 
 local oldworld = function()
 	local c = GetCurrentMapContinent()
 
-	if(not IsSpellKnown(90269) and not (c == 3 or c == 4)) then return true end
+	-- TODO: Apply correctly logic:
+--	if(not IsSpellKnown(90269) and not (c == 3 or c == 4)) then return true end
+end
+
+local vashjir = function()
+	local z = GetCurrentMapZone()
+	return (z == 16 or z == 23 or z == 1 or z == 36) and UnitBuff('player', sealegs)
 end
 
 local wg = function()
@@ -37,6 +44,13 @@ local mounts = {
 			61451,46197,44153,32245,32244,32243,32240,32239,32235,
 		},
 	},
+
+	sea = {
+		{
+			75207,
+		}
+	},
+
 	ground = {
 		-- 100
 		{
@@ -109,8 +123,12 @@ addon:RegisterEvent'PLAYER_LOGIN'
 SlashCmdList['NORU_MOUNT'] = function()
 	if(not IsMounted() and not InCombatLockdown()) then
 		local flying = player.flying
+		local sea = player.sea
 		local ground = player.ground
-		if(IsFlyableArea() and flying and not wg() and not oldworld()) then
+
+		if(vashjir()) then
+			CallCompanion('MOUNT', sea[1])
+		elseif(IsFlyableArea() and flying and not wg() and not oldworld()) then
 			CallCompanion('MOUNT', flying[math.random(#flying)])
 		elseif(ground) then
 			CallCompanion('MOUNT', ground[math.random(#ground)])
