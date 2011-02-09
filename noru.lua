@@ -18,12 +18,6 @@ local vashjir = function()
 	return (z == 16 or z == 23 or z == 1 or z == 36) and UnitBuff('player', sealegs)
 end
 
-local wg = function()
-	local wait = GetWintergraspWaitTime()
-	local zone = GetZoneText()
-	if (zone == "Wintergrasp") and not wait then return true end
-end
-
 local mounts = {
 	flying = {
 		-- 310
@@ -128,7 +122,7 @@ SlashCmdList['NORU_MOUNT'] = function()
 
 		if(vashjir()) then
 			CallCompanion('MOUNT', sea[1])
-		elseif(IsFlyableArea() and flying and not wg() and not oldworld()) then
+		elseif(IsFlyableArea() and flying and not oldworld()) then
 			CallCompanion('MOUNT', flying[math.random(#flying)])
 		elseif(ground) then
 			CallCompanion('MOUNT', ground[math.random(#ground)])
